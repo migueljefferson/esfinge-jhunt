@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; UTF-8" />
+	<title>Cadastro de Usuário</title>
+</h:head>
+<h:body style="background-color: #777777;">
+
+	<h:form prependId="false"
+		style="position: absolute; top: 0px; left: 50px;">
+		<p:dialog minHeight="600" height="600" minWidth="350" width="350"
+			resizable="false" draggable="false" closable="false"
+			widgetVar="modalCadastro" visible="true" position="left"
+			style="position: absolute; top: 50px; left: 50px;">
+			<center>
+				<h2>Cadastro</h2>
+			</center>
+			<h:outputLabel value="Foto do perfil" />
+			<br />
+			<br />
+
+			<h:form enctype="multipart/form-data">
+				<h:graphicImage value="#{fileUploadController.file}" width="80"
+					height="80" />
+				<p:messages showDetail="true" />
+
+				<p:fileUpload value="#{fileUploadController.file}" mode="simple"
+					style="width: 108px; position: absolute; top: 150px; left: 150px; font-size: 12px;" />
+
+			</h:form>
+
+			<br />
+			<h:panelGrid columns="2">
+				<h:outputLabel value="Nome" for="nome" />
+				<p:inputText id="nome" value="#{p}" />
+				<h:outputLabel value="Apelido" for="apelido" />
+				<p:inputText id="apelido" value="#{p}" />
+				<h:outputLabel value="E-Mail" for="email" />
+				<p:inputText id="email" value="#{p}" />
+				<h:outputLabel value="Sexo" />
+				<p:selectOneRadio id="sexo" value="#{p}">
+					<f:selectItem itemLabel="Masculino" itemValue="M" />
+					<f:selectItem itemLabel="Feminino" itemValue="F" />
+				</p:selectOneRadio>
+			</h:panelGrid>
+			<h:panelGrid columns="4">
+				<h:outputLabel value="Nascimento" />
+				<h:selectOneMenu value="#{p}" id="dia">
+					<f:selectItem itemLabel="dia" />
+				</h:selectOneMenu>
+
+				<h:selectOneMenu value="#{p}" id="mes">
+					<f:selectItem itemLabel="mês" />
+				</h:selectOneMenu>
+
+				<h:selectOneMenu value="#{p}" id="ano">
+					<f:selectItem itemLabel="ano" />
+				</h:selectOneMenu>
+			</h:panelGrid>
+
+			<div style="position: absolute; top: 430px; left: 20px;">
+				<h:outputLabel value="Senha" />
+				<div style="position: absolute; top: 0px; left: 65px;">
+					<p:inputText type="password" id="senha" />
+				</div>
+				<div style="position: absolute; top: 35px; left: 65px;">
+					<p:inputText type="password" id="confirmarSenha" />
+				</div>
+			</div>
+			<div style="position: absolute; top: 520px; left: 110px;">
+				<p:commandButton value="Cadastrar" />
+			</div>
+			<div align="left" style="position: absolute; top: 580px;">
+				<h:commandLink action="#{p}" value="Cancelar" />
+			</div>
+		</p:dialog>
+	</h:form>
+	<p:dialog id="modalDialog" header="Carregar foto"
+		widgetVar="carregarFoto" modal="true" minHeight="200">
+		<p:fileUpload label="Escolher" dragDropSupport="false"
+			showButtons="false" uploadLabel="fotoPerfil" />
+	</p:dialog>
+	<div
+		style="position: absolute; top: 345px; right: 80px; border-left-style: groove; border-bottom-style: groove; border-right-style: groove; border-top-style: groove;">
+		<img id="img03" src="images/login.png" alt="" height="320" width="700"
+			style="background-color: #ffffff;" />
+	</div>
+	<div
+		style="position: absolute; top: 25px; right: 450px; border-left-style: groove; border-bottom-style: groove; border-right-style: groove; border-top-style: groove;">
+		<img id="img01" src="" alt="" height="285px;" width="330px;"
+			style="background-color: #ffffff;" />
+	</div>
+	<div
+		style="position: absolute; top: 25px; right: 79px; border-left-style: groove; border-bottom-style: groove; border-right-style: groove; border-top-style: groove;">
+		<img id="img02" src="" alt="" height="285px;" width="330px;"
+			style="background-color: #ffffff;" />
+	</div>
+</h:body>
+</html>
