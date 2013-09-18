@@ -4,6 +4,7 @@
 	<comment></comment>
 	<projects>
 		<project>Esfinge-Web</project>
+		<project>Esfinge-Core</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
