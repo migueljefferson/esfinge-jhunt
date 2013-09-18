@@ -1,0 +1,120 @@
+@CHARSET "UTF-8";
+
+.body{
+	background-color: #777777;
+}
+
+/*******************************
+	Login
+********************************/
+
+#login-button{
+	height: 67px;
+	position: absolute;
+	top: 11px;
+	left: 250px;
+}
+
+#redefinir-senha{
+	float: left;
+	position: relative; 
+	top: 8px; 
+	left: 70px;
+	
+}
+
+#cadastrar{
+	position: absolute;
+	bottom: 10px;
+	right: 15px;
+}
+
+#panel-form{
+	float: left;
+}
+
+/*******************************
+	Cadastro
+********************************/
+
+#form-cadastro{
+	position: absolute;
+	top: 0px;
+	left: 50px;
+}
+
+#dialog-cadastro{
+	position: absolute;
+	top: 55px;
+	left: 50px;
+}
+
+#form-senha{
+	position: absolute;
+	top: 430px;
+	left: 20px;
+}
+
+#senha{
+	position: absolute;
+	top: 0px;
+	left: 65px;
+}
+
+#confirmarSenha{
+	position: absolute;
+	top: 35px;
+	left: 65px;
+}
+
+#input-cadastrar{
+	position: absolute;
+	top: 520px;
+	left: 110px;
+}	
+
+#link-cancelar{
+	float: left;
+	position: absolute; 
+	top: 580px;
+}
+
+#img01, #img02, #img03{
+	background-color: #ffffff;
+	
+	border-left-style: groove;
+	border-bottom-style: groove;
+	border-right-style: groove;
+	border-top-style: groove;
+}
+
+#img01, #img02{
+	height: 285px; 
+	width: 330px;
+}
+
+#img01{
+	position: absolute;
+	top: 25px;
+	right: 450px;
+}
+
+#img02{
+	position: absolute;
+	top: 25px;
+	right: 79px;
+}
+
+#img03{
+	position: absolute;
+	top: 345px;
+	right: 80px;
+	
+	height: 320px; 
+	width: 700px;
+}
+
+
+
+
+
