@@ -6,8 +6,11 @@
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; UTF-8" />
 	<title>Login</title>
+	<style type="text/css">
+		@import url("css/style.css");
+	</style>
 </h:head>
-<h:body style="background-color: #777777;">
+<h:body styleClass="body-login">
 	<p:dialog header="Esfinge" closable="false" widgetVar="modalLogin"
 		minWidth="370" width="370" draggable="false" resizable="false"
 		visible="true" minHeight="150" height="150">
@@ -15,23 +18,25 @@
 			<h:form prependId="false">
 				<h:panelGroup id="log">
 					<p:messages id="mensagens" showDetail="true" showSummary="false" />
-					<h:panelGrid columns="2" style="float: left;">
+					<h:panelGrid id="panel-form" columns="2">
 						<p:outputLabel value="Login" for="login" />
 						<p:inputText id="login" value="#{loginMB.usuario}" size="15" />
 						<p:outputLabel value="Senha" for="senha" />
 						<p:inputText type="password" id="senha" value="#{loginMB.senha}"
 							size="15" />
-						<p:commandButton value="Entrar" action="#{loginMB.logar}"
-							style="height: 67px; position: absolute; top: 11px; left: 250px;" />
+						<p:commandButton id="login-button" value="Entrar" action="#{loginMB.logar}"/>
 					</h:panelGrid>
 				</h:panelGroup>
 			</h:form>
 		</center>
 		<h:form>
-			<h:commandLink action="#{p}" value="Esqueceu sua senha?"
-				style="position: absolute; top: 95px; left: 50px;" />
-			<h:commandLink action="cadastro" value="Cadastre-se!"
-				style="position: absolute; bottom: 10px; right: 15px;" />
+			<div id="redefinir-senha">
+				<h:commandLink action="#{p}" value="Esqueceu sua senha?" />
+			</div>
+			<div id="cadastrar">
+				<h:commandLink  action="cadastro" value="Cadastre-se!"/>
+			</div>
+			
 		</h:form>
 	</p:dialog>
 </h:body>

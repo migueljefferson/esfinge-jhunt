@@ -6,15 +6,15 @@
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; UTF-8" />
 	<title>Cadastro de Usuário</title>
+	<style type="text/css">
+		@import url("css/style.css");
+	</style>
 </h:head>
-<h:body style="background-color: #777777;">
-
-	<h:form prependId="false"
-		style="position: absolute; top: 0px; left: 50px;">
-		<p:dialog minHeight="600" height="600" minWidth="350" width="350"
+<h:body styleClass="body">
+	<h:form id="form-cadastro" prependId="false">
+		<p:dialog id="dialog-cadastro" minHeight="600" height="600" minWidth="350" width="350"
 			resizable="false" draggable="false" closable="false"
-			widgetVar="modalCadastro" visible="true" position="left"
-			style="position: absolute; top: 50px; left: 50px;">
+			widgetVar="modalCadastro" visible="true" position="left">
 			<center>
 				<h2>Cadastro</h2>
 			</center>
@@ -22,14 +22,12 @@
 			<br />
 			<br />
 
-			<h:form enctype="multipart/form-data">
-				<h:graphicImage value="#{fileUploadController.file}" width="80"
+			<h:form styleClass="data" enctype="multipart/form-data">
+				<h:graphicImage id="foto" value="#{fileUploadController.file}" width="80"
 					height="80" />
 				<p:messages showDetail="true" />
-
-				<p:fileUpload value="#{fileUploadController.file}" mode="simple"
+				<p:fileUpload styleClass="file-upload" id="escolher-foto" value="#{fileUploadController.file}" mode="simple"
 					style="width: 108px; position: absolute; top: 150px; left: 150px; font-size: 12px;" />
-
 			</h:form>
 
 			<br />
@@ -61,21 +59,13 @@
 				</h:selectOneMenu>
 			</h:panelGrid>
 
-			<div style="position: absolute; top: 430px; left: 20px;">
+			<div id="form-senha">
 				<h:outputLabel value="Senha" />
-				<div style="position: absolute; top: 0px; left: 65px;">
-					<p:inputText type="password" id="senha" />
-				</div>
-				<div style="position: absolute; top: 35px; left: 65px;">
-					<p:inputText type="password" id="confirmarSenha" />
-				</div>
+				<p:inputText type="password" id="senha" />
+				<p:inputText type="password" id="confirmarSenha" />
 			</div>
-			<div style="position: absolute; top: 520px; left: 110px;">
-				<p:commandButton value="Cadastrar" />
-			</div>
-			<div align="left" style="position: absolute; top: 580px;">
-				<h:commandLink action="#{p}" value="Cancelar" />
-			</div>
+			<p:commandButton id="input-cadastrar" value="Cadastrar" />
+			<h:commandLink id="link-cancelar" action="#{p}" value="Cancelar" />
 		</p:dialog>
 	</h:form>
 	<p:dialog id="modalDialog" header="Carregar foto"
@@ -83,20 +73,12 @@
 		<p:fileUpload label="Escolher" dragDropSupport="false"
 			showButtons="false" uploadLabel="fotoPerfil" />
 	</p:dialog>
+	<img id="img03" src="" alt=""/>
+	<img id="img01" src="" alt="" />
 	<div
-		style="position: absolute; top: 345px; right: 80px; border-left-style: groove; border-bottom-style: groove; border-right-style: groove; border-top-style: groove;">
-		<img id="img03" src="images/login.png" alt="" height="320" width="700"
-			style="background-color: #ffffff;" />
-	</div>
-	<div
-		style="position: absolute; top: 25px; right: 450px; border-left-style: groove; border-bottom-style: groove; border-right-style: groove; border-top-style: groove;">
-		<img id="img01" src="" alt="" height="285px;" width="330px;"
-			style="background-color: #ffffff;" />
-	</div>
-	<div
-		style="position: absolute; top: 25px; right: 79px; border-left-style: groove; border-bottom-style: groove; border-right-style: groove; border-top-style: groove;">
-		<img id="img02" src="" alt="" height="285px;" width="330px;"
-			style="background-color: #ffffff;" />
+		style="">
+		<img id="img02" src="" alt="" 
+			style="" />
 	</div>
 </h:body>
 </html>
