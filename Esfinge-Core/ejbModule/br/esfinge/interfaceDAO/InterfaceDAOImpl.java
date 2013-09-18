@@ -1,43 +1,61 @@
 package br.esfinge.interfaceDAO;
 
-import java.io.Serializable;
 import java.util.List;
-import org.hibernate.Session;
+
+import javax.persistence.EntityManager;
 
 public class InterfaceDAOImpl<T, PK> implements InterfaceDAO<T, PK> {
 
-	private Session sessao;
+	private EntityManager manager;
 	private T entidade;
+	private String nomeEntidade;
 	
-	public void setSessao(Session sessao){
-		this.sessao = sessao;
+	public void setEntityManager(EntityManager manager){
+		this.manager = manager;
+	}
+	
+	public void setEntidade(T entidade){
+		this.entidade = entidade;
+	}
+	
+	public void setNomeEntidade(String nomeEntidade){
+		this.nomeEntidade = nomeEntidade;
 	}
 	
 	@Override
 	public void salvar(T entidade) {
-		this.sessao.save(entidade);
+		this.manager.getTransaction().begin();
+		this.manager.persist(entidade);
+		this.manager.getTransaction().commit();
+		this.manager.close();
 	}
 
 	@Override
 	public void atualizar(T entidade) {
-		this.sessao.update(entidade);
+		this.manager.getTransaction().begin();
+		this.manager.merge(entidade);
+		this.manager.getTransaction().commit();
+		this.manager.close();
 	}
 
 	@Override
 	public void excluir(T entidade) {
-		this.sessao.delete(entidade);
+		this.manager.getTransaction().begin();
+		this.manager.remove(entidade);
+		this.manager.getTransaction().commit();
+		this.manager.close();
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public T carregar(PK primaryKey) {
-		return (T) this.sessao.get(entidade.getClass(), (Serializable) primaryKey);
+		return (T) this.manager.find(entidade.getClass(), primaryKey);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<T> listar() {
-		return this.sessao.createCriteria(entidade.getClass()).list();
+		return this.manager.createQuery("SELECT e FROM "+nomeEntidade+" as e").getResultList();
 	}
 
 }
