@@ -1,4 +1,4 @@
-package ejbModule.br.esfinge.entidades;
+package br.esfinge.entidades;
 
 import java.io.Serializable;
 
