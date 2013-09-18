@@ -59,4 +59,6 @@ public class Resumo implements Serializable{
 	public void setStatusResumo(StatusResumo statusResumo) {this.statusResumo = statusResumo;}
 
 	public Date getDataPublicacao() {return dataPublicacao;}
+	
+	//Falta gerar os 'hashCode()' e 'equals()' 
 }
