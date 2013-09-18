@@ -2,6 +2,7 @@ package br.esfinge.entidades;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.Arrays;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -60,5 +61,62 @@ public class Resumo implements Serializable{
 
 	public Date getDataPublicacao() {return dataPublicacao;}
 	
-	//Falta gerar os 'hashCode()' e 'equals()' 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((dataPublicacao == null) ? 0 : dataPublicacao.hashCode());
+		result = prime * result
+				+ ((idResumo == null) ? 0 : idResumo.hashCode());
+		result = prime * result + Arrays.hashCode(palavraChave);
+		result = prime * result
+				+ ((referencia == null) ? 0 : referencia.hashCode());
+		result = prime * result
+				+ ((statusResumo == null) ? 0 : statusResumo.hashCode());
+		result = prime * result + ((texto == null) ? 0 : texto.hashCode());
+		result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Resumo other = (Resumo) obj;
+		if (dataPublicacao == null) {
+			if (other.dataPublicacao != null)
+				return false;
+		} else if (!dataPublicacao.equals(other.dataPublicacao))
+			return false;
+		if (idResumo == null) {
+			if (other.idResumo != null)
+				return false;
+		} else if (!idResumo.equals(other.idResumo))
+			return false;
+		if (!Arrays.equals(palavraChave, other.palavraChave))
+			return false;
+		if (referencia == null) {
+			if (other.referencia != null)
+				return false;
+		} else if (!referencia.equals(other.referencia))
+			return false;
+		if (statusResumo != other.statusResumo)
+			return false;
+		if (texto == null) {
+			if (other.texto != null)
+				return false;
+		} else if (!texto.equals(other.texto))
+			return false;
+		if (titulo == null) {
+			if (other.titulo != null)
+				return false;
+		} else if (!titulo.equals(other.titulo))
+			return false;
+		return true;
+	}
+	
 }
