@@ -7,4 +7,7 @@
       <context-root>Esfinge-Web</context-root>
     </web>
   </module>
+  <module>
+    <ejb>Esfinge-Core.jar</ejb>
+  </module>
 </application>

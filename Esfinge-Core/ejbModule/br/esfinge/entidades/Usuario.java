@@ -7,8 +7,12 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
@@ -16,12 +20,16 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Email;
 
 @Entity
+@Table(name="tb_usuario")
 public class Usuario implements Serializable{
 
 	private static final long serialVersionUID = 7125655873018001520L;
 
 	@Id
-	@Email(message="Informe um e-mail válido!",regexp="[a-zA-Z0-9\\-\\_\\.]+@[a-zA-z0-9\\-\\_\\.]+") 
+	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	private Long id;
+	
+	@Email(message="Informe um e-mail válido!",regexp="[a-zA-Z0-9\\-\\_\\.]+@[a-zA-z0-9\\-\\_\\.]+")
 	private String email;
 
 	@Column(nullable=false) 
@@ -33,6 +41,7 @@ public class Usuario implements Serializable{
 	private Date dataCadastro;
 	
 	@OneToMany(fetch=FetchType.LAZY)
+	@JoinColumn(table="tb_usuario_convite", referencedColumnName="usuario")
 	private List<Usuario> amigos;
 	
 	public String getEmail() {return email;}
@@ -41,10 +50,11 @@ public class Usuario implements Serializable{
 	public String getSenha() {return senha;}
 	public void setSenha(String senha) {this.senha = senha;}
 
+	public void setDate(Date dataCadastro){this.dataCadastro = dataCadastro;}
 	public Date getDataCadastro() {return dataCadastro;} 
 	
-	public List<Usuario> getAmigos() {return amigos;}
-	public void setAmigos(List<Usuario> amigos) {this.amigos = amigos;}
+	public Long getAmigos() {return id;}
+	public void setAmigos(Long id) {this.id = id;}
 
 	@Override
 	public int hashCode() {
