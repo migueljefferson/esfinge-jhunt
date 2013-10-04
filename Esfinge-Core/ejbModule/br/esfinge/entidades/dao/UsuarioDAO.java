@@ -4,12 +4,10 @@ import java.util.List;
 
 import br.esfinge.entidades.Usuario;
 import br.esfinge.interfaceDAO.InterfaceDAOImpl;
-import br.esfinge.util.PersistenceUtil;
 
 public class UsuarioDAO extends InterfaceDAOImpl<Usuario, String>{
 	
 	public UsuarioDAO() {
-		super.setEntityManager(PersistenceUtil.getEntityManager());
 		super.setEntidade(new Usuario());
 		super.setNomeEntidade("Usuario");
 	}

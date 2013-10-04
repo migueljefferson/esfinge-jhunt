@@ -3,16 +3,14 @@ package br.esfinge.interfaceDAO;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 public class InterfaceDAOImpl<T, PK> implements InterfaceDAO<T, PK> {
 
+	@PersistenceContext
 	private EntityManager manager;
 	private T entidade;
 	private String nomeEntidade;
-	
-	public void setEntityManager(EntityManager manager){
-		this.manager = manager;
-	}
 	
 	public void setEntidade(T entidade){
 		this.entidade = entidade;
