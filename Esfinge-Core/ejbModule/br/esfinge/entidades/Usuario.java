@@ -2,67 +2,104 @@ package br.esfinge.entidades;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.Size;
-
-import org.hibernate.validator.constraints.Email;
 
 @Entity
 @Table(name="tb_usuario")
-public class Usuario implements Serializable{
+public class Usuario extends EntidadeGenerica implements Serializable{
 
-	private static final long serialVersionUID = 7125655873018001520L;
+	private static final long serialVersionUID = 1560701455472816037L;
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
-	private Long id;
-	
-	@Email(message="Informe um e-mail válido!",regexp="[a-zA-Z0-9\\-\\_\\.]+@[a-zA-z0-9\\-\\_\\.]+")
+	@Column(name="usu_email", nullable=false)
 	private String email;
 
-	@Column(nullable=false) 
-	@Size(min=6, message="A senha deve conter no mínimo 6 caracteres!")
+	@Column(name="usu_senha", nullable=false) 
 	private String senha;
 
-	@Column(nullable=false, updatable=false)
+	@Column(name="usu_datacadast", nullable=false, updatable=false)
 	@Temporal(TemporalType.DATE) 
 	private Date dataCadastro;
 	
-	@OneToMany(fetch=FetchType.LAZY)
-	@JoinColumn(table="tb_usuario_convite", referencedColumnName="usuario")
-	private List<Usuario> amigos;
+	@OneToMany(mappedBy="tb_usuario", cascade=CascadeType.ALL, fetch=FetchType.LAZY, orphanRemoval=true)
+	private Set<Convite> amizades;
 	
-	public String getEmail() {return email;}
-	public void setEmail(String email) {this.email = email;}
-
-	public String getSenha() {return senha;}
-	public void setSenha(String senha) {this.senha = senha;}
-
-	public void setDate(Date dataCadastro){this.dataCadastro = dataCadastro;}
-	public Date getDataCadastro() {return dataCadastro;} 
+	@OneToMany(mappedBy="tb_usuario", cascade=CascadeType.ALL, fetch=FetchType.LAZY, orphanRemoval=true)
+	private Set<Resumo> resumos;
 	
-	public Long getAmigos() {return id;}
-	public void setAmigos(Long id) {this.id = id;}
+	@OneToOne(cascade=CascadeType.ALL, optional=false, fetch=FetchType.EAGER, orphanRemoval=true)
+	@PrimaryKeyJoinColumn
+	private Perfil perfil;
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public Date getDataCadastro() {
+		return dataCadastro;
+	}
+
+	public void setDataCadastro(Date dataCadastro) {
+		this.dataCadastro = dataCadastro;
+	}
+
+	public Set<Convite> getAmizades() {
+		return amizades;
+	}
+
+	public void setAmizades(Set<Convite> amizades) {
+		this.amizades = amizades;
+	}
+
+	public Set<Resumo> getResumos() {
+		return resumos;
+	}
+
+	public void setResumos(Set<Resumo> resumos) {
+		this.resumos = resumos;
+	}
+
+	public Perfil getPerfil() {
+		return perfil;
+	}
+
+	public void setPerfil(Perfil perfil) {
+		this.perfil = perfil;
+	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
+		result = prime * result
+				+ ((amizades == null) ? 0 : amizades.hashCode());
 		result = prime * result
 				+ ((dataCadastro == null) ? 0 : dataCadastro.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((perfil == null) ? 0 : perfil.hashCode());
+		result = prime * result + ((resumos == null) ? 0 : resumos.hashCode());
 		result = prime * result + ((senha == null) ? 0 : senha.hashCode());
 		return result;
 	}
@@ -71,11 +108,16 @@ public class Usuario implements Serializable{
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		Usuario other = (Usuario) obj;
+		if (amizades == null) {
+			if (other.amizades != null)
+				return false;
+		} else if (!amizades.equals(other.amizades))
+			return false;
 		if (dataCadastro == null) {
 			if (other.dataCadastro != null)
 				return false;
@@ -86,6 +128,16 @@ public class Usuario implements Serializable{
 				return false;
 		} else if (!email.equals(other.email))
 			return false;
+		if (perfil == null) {
+			if (other.perfil != null)
+				return false;
+		} else if (!perfil.equals(other.perfil))
+			return false;
+		if (resumos == null) {
+			if (other.resumos != null)
+				return false;
+		} else if (!resumos.equals(other.resumos))
+			return false;
 		if (senha == null) {
 			if (other.senha != null)
 				return false;
@@ -93,7 +145,5 @@ public class Usuario implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
 	
 }
