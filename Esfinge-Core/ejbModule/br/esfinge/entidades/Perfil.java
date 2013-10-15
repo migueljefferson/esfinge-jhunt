@@ -8,91 +8,142 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import br.esfinge.enums.EstadoCivil;
 
 @Entity
-public class Perfil implements Serializable{
+@Table(name="tb_perfil")
+public class Perfil extends EntidadeGenerica implements Serializable{
 
-	private static final long serialVersionUID = 3809292828036356581L;
+	private static final long serialVersionUID = -1966212312156562110L;
+
+	@Column(name="per_nome", nullable=false)
+	private String nome;
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long idPerfil;
-	
-	@Column(nullable=false)
-	private String nomePerfil;
-	
+	@Column(name="per_apelido")
 	private String apelido;
 	
+	@Column(name="per_datanasc")
 	private Date dataNascimento;
 	
+	@Column(name="per_foto")
 	private byte[] foto;
 	
-	private String[] livro;
+	@Column(name="per_livros")
+	private String[] livros;
 	
+	@Column(name="per_sexo", nullable=false)
 	private Character sexo;
 	
+	@Column(name="per_interesses")
 	private String[] interesses;
 	
+	@Column(name="per_estadocivil")
 	@Enumerated(EnumType.ORDINAL)
 	private EstadoCivil estadoCivil;
-
-	public Long getIdPerfil() {return idPerfil;}
-	public void setIdPerfil(Long idPerfil) {this.idPerfil = idPerfil;}
-
-	public String getNomePerfil() {return nomePerfil;}
-	public void setNomePerfil(String nomePerfil) {this.nomePerfil = nomePerfil;}
-
-	public String getApelido() {return apelido;}
-	public void setApelido(String apelido) {this.apelido = apelido;}
-
-	public Date getDataNascimento() {return dataNascimento;}
-	@SuppressWarnings("deprecation")
-	public void setDataNascimento(int year, int month, int day) {this.dataNascimento = new Date(year, month, day);}
-
-	public byte[] getFoto() {return foto;}
-	public void setFoto(byte[] foto) {this.foto = foto;}
-
-	public String[] getLivro() {return livro;}
-	public void setLivro(String[] livro) {this.livro = livro;}
-
-	public Character getSexo() {return sexo;}
-	public void setSexo(Character sexo) {this.sexo = sexo;}
-
-	public String[] getInteresses() {return interesses;}
-	public void setInteresses(String[] interesses) {this.interesses = interesses;}
-
-	public EstadoCivil getEstadoCivil() {return estadoCivil;}
-	public void setEstadoCivil(EstadoCivil estadoCivil) {this.estadoCivil = estadoCivil;}
 	
+	@OneToOne
+	@JoinColumn(name="per_usu_id", referencedColumnName="tb_id")
+	private Usuario usuario;
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getApelido() {
+		return apelido;
+	}
+
+	public void setApelido(String apelido) {
+		this.apelido = apelido;
+	}
+
+	public Date getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(Date dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
+
+	public byte[] getFoto() {
+		return foto;
+	}
+
+	public void setFoto(byte[] foto) {
+		this.foto = foto;
+	}
+
+	public String[] getLivros() {
+		return livros;
+	}
+
+	public void setLivros(String[] livros) {
+		this.livros = livros;
+	}
+
+	public Character getSexo() {
+		return sexo;
+	}
+
+	public void setSexo(Character sexo) {
+		this.sexo = sexo;
+	}
+
+	public String[] getInteresses() {
+		return interesses;
+	}
+
+	public void setInteresses(String[] interesses) {
+		this.interesses = interesses;
+	}
+
+	public EstadoCivil getEstadoCivil() {
+		return estadoCivil;
+	}
+
+	public void setEstadoCivil(EstadoCivil estadoCivil) {
+		this.estadoCivil = estadoCivil;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((apelido == null) ? 0 : apelido.hashCode());
 		result = prime * result
 				+ ((dataNascimento == null) ? 0 : dataNascimento.hashCode());
 		result = prime * result
 				+ ((estadoCivil == null) ? 0 : estadoCivil.hashCode());
 		result = prime * result + Arrays.hashCode(foto);
-		result = prime * result
-				+ ((idPerfil == null) ? 0 : idPerfil.hashCode());
 		result = prime * result + Arrays.hashCode(interesses);
-		result = prime * result + Arrays.hashCode(livro);
-		result = prime * result
-				+ ((nomePerfil == null) ? 0 : nomePerfil.hashCode());
+		result = prime * result + Arrays.hashCode(livros);
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((sexo == null) ? 0 : sexo.hashCode());
+		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -111,28 +162,26 @@ public class Perfil implements Serializable{
 			return false;
 		if (!Arrays.equals(foto, other.foto))
 			return false;
-		if (idPerfil == null) {
-			if (other.idPerfil != null)
-				return false;
-		} else if (!idPerfil.equals(other.idPerfil))
-			return false;
 		if (!Arrays.equals(interesses, other.interesses))
 			return false;
-		if (!Arrays.equals(livro, other.livro))
+		if (!Arrays.equals(livros, other.livros))
 			return false;
-		if (nomePerfil == null) {
-			if (other.nomePerfil != null)
+		if (nome == null) {
+			if (other.nome != null)
 				return false;
-		} else if (!nomePerfil.equals(other.nomePerfil))
+		} else if (!nome.equals(other.nome))
 			return false;
 		if (sexo == null) {
 			if (other.sexo != null)
 				return false;
 		} else if (!sexo.equals(other.sexo))
 			return false;
+		if (usuario == null) {
+			if (other.usuario != null)
+				return false;
+		} else if (!usuario.equals(other.usuario))
+			return false;
 		return true;
 	}
-	
-	
-	
+
 }

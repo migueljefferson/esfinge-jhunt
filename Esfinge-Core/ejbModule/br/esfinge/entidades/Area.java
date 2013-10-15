@@ -1,71 +1,90 @@
 package br.esfinge.entidades;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
-public class Area implements Serializable{
+@Table(name="tb_area")
+public class Area extends EntidadeGenerica implements Serializable{
 
-	private static final long serialVersionUID = 8008199863066677364L;
+	private static final long serialVersionUID = 6335124941393446975L;
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long idArea;
+	@Column(name="are_nome", nullable=false)
+	private String nome;
 	
-	@Column(nullable=false)
-	private String nomeArea;
+	@Column(name="are_descricao", nullable=false)
+	private String descricao;
 	
-	private String descricaoArea;
+	@NotNull
+	@ManyToMany(mappedBy="tb_area", fetch=FetchType.LAZY)
+	private Set<Disciplina> disciplinas;
 
-	public Long getIdArea() {return idArea;}
-	public void setIdArea(Long idArea) {this.idArea = idArea;}
+	public String getNome() {
+		return nome;
+	}
 
-	public String getNomeArea() {return nomeArea;}
-	public void setNomeArea(String nomeArea) {this.nomeArea = nomeArea;}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
-	public String getDescricaoArea() {return descricaoArea;}
-	public void setDescricaoArea(String descricaoArea) {this.descricaoArea = descricaoArea;}
-	
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public Set<Disciplina> getDisciplinas() {
+		return disciplinas;
+	}
+
+	public void setDisciplinas(Set<Disciplina> disciplinas) {
+		this.disciplinas = disciplinas;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result
-				+ ((descricaoArea == null) ? 0 : descricaoArea.hashCode());
-		result = prime * result + ((idArea == null) ? 0 : idArea.hashCode());
+				+ ((descricao == null) ? 0 : descricao.hashCode());
 		result = prime * result
-				+ ((nomeArea == null) ? 0 : nomeArea.hashCode());
+				+ ((disciplinas == null) ? 0 : disciplinas.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		Area other = (Area) obj;
-		if (descricaoArea == null) {
-			if (other.descricaoArea != null)
+		if (descricao == null) {
+			if (other.descricao != null)
 				return false;
-		} else if (!descricaoArea.equals(other.descricaoArea))
+		} else if (!descricao.equals(other.descricao))
 			return false;
-		if (idArea == null) {
-			if (other.idArea != null)
+		if (disciplinas == null) {
+			if (other.disciplinas != null)
 				return false;
-		} else if (!idArea.equals(other.idArea))
+		} else if (!disciplinas.equals(other.disciplinas))
 			return false;
-		if (nomeArea == null) {
-			if (other.nomeArea != null)
+		if (nome == null) {
+			if (other.nome != null)
 				return false;
-		} else if (!nomeArea.equals(other.nomeArea))
+		} else if (!nome.equals(other.nome))
 			return false;
 		return true;
 	}

@@ -1,73 +1,107 @@
 package br.esfinge.entidades;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
-public class Assunto implements Serializable{
+@Table(name="tb_assunto")
+public class Assunto extends EntidadeGenerica implements Serializable{
 
-	private static final long serialVersionUID = 5538157042163510904L;
+	private static final long serialVersionUID = -7379324415832452881L;
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long idAssunto;
+	@Column(name="ass_nome", nullable=false)
+	private String nome;
 	
-	@Column(nullable=false)
-	private String nomeAssunto;
+	@Column(name="ass_descricao", nullable=false)
+	private String descricao;
 	
-	private String descricaoAssunto;
-
-	public Long getIdAssunto() {return idAssunto;}
-	public void setIdAssunto(Long idAssunto) {this.idAssunto = idAssunto;}
-
-	public String getNomeAssunto() {return nomeAssunto;}
-	public void setNomeAssunto(String nomeAssunto) {this.nomeAssunto = nomeAssunto;}
-
-	public String getDescricaoAssunto() {return descricaoAssunto;}
-	public void setDescricaoAssunto(String descricaoAssunto) {this.descricaoAssunto = descricaoAssunto;}
+	@ManyToMany(mappedBy="tb_assunto", fetch=FetchType.LAZY)
+	private Set<Resumo> resumos;
 	
+	@NotNull
+	@ManyToMany(mappedBy="tb_assunto", fetch=FetchType.LAZY)
+	private Set<Disciplina> disciplinas;
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public Set<Resumo> getResumos() {
+		return resumos;
+	}
+
+	public void setResumos(Set<Resumo> resumos) {
+		this.resumos = resumos;
+	}
+
+	public Set<Disciplina> getDisciplinas() {
+		return disciplinas;
+	}
+
+	public void setDisciplinas(Set<Disciplina> disciplinas) {
+		this.disciplinas = disciplinas;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
-		result = prime
-				* result
-				+ ((descricaoAssunto == null) ? 0 : descricaoAssunto.hashCode());
+		int result = super.hashCode();
 		result = prime * result
-				+ ((idAssunto == null) ? 0 : idAssunto.hashCode());
+				+ ((descricao == null) ? 0 : descricao.hashCode());
 		result = prime * result
-				+ ((nomeAssunto == null) ? 0 : nomeAssunto.hashCode());
+				+ ((disciplinas == null) ? 0 : disciplinas.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((resumos == null) ? 0 : resumos.hashCode());
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		Assunto other = (Assunto) obj;
-		if (descricaoAssunto == null) {
-			if (other.descricaoAssunto != null)
+		if (descricao == null) {
+			if (other.descricao != null)
 				return false;
-		} else if (!descricaoAssunto.equals(other.descricaoAssunto))
+		} else if (!descricao.equals(other.descricao))
 			return false;
-		if (idAssunto == null) {
-			if (other.idAssunto != null)
+		if (disciplinas == null) {
+			if (other.disciplinas != null)
 				return false;
-		} else if (!idAssunto.equals(other.idAssunto))
+		} else if (!disciplinas.equals(other.disciplinas))
 			return false;
-		if (nomeAssunto == null) {
-			if (other.nomeAssunto != null)
+		if (nome == null) {
+			if (other.nome != null)
 				return false;
-		} else if (!nomeAssunto.equals(other.nomeAssunto))
+		} else if (!nome.equals(other.nome))
+			return false;
+		if (resumos == null) {
+			if (other.resumos != null)
+				return false;
+		} else if (!resumos.equals(other.resumos))
 			return false;
 		return true;
 	}
