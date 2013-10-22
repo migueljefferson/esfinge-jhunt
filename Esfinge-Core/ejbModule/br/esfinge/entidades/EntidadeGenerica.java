@@ -16,7 +16,7 @@ public abstract class EntidadeGenerica implements Serializable {
 	
 	@Id
 	@Column(name="tb_id")
-	@SequenceGenerator(name="gerador_de_sequencia", sequenceName="esfinge_seq", allocationSize=1)
+	@SequenceGenerator(name="esfinge_seq", sequenceName="esfinge_seq", allocationSize=1)
 	@GeneratedValue(generator="esfinge_seq", strategy=GenerationType.SEQUENCE)
 	private Long id;
 
