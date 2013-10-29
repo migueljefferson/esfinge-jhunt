@@ -6,29 +6,49 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="tb_disciplina")
-public class Disciplina extends EntidadeGenerica implements Serializable {
+public class Disciplina implements Serializable {
 
 	private static final long serialVersionUID = -8788740074345133591L;
 
-	@Column(name="dis_nome", nullable=false)
+	@Id
+	@Column(name="id_disciplina")
+	@SequenceGenerator(name="seq_disc", sequenceName="seq_disc",initialValue=1)
+	@GeneratedValue(generator="seq_disc",strategy=GenerationType.SEQUENCE)
+	private Long id;
+	
+	@Column(name="disc_nome", nullable=false)
 	private String nome;
 	
-	@Column(name="dis_descricao", nullable=false)
+	@Column(name="disc_descricao", nullable=false)
 	private String descricao;
 
 	@NotNull
-	@ManyToMany(mappedBy="tb_disciplina", fetch=FetchType.LAZY)
+	@ManyToMany(fetch=FetchType.LAZY)
 	private Set<Assunto> assuntos;
 	
 	@NotNull
-	@ManyToMany(mappedBy="tb_disciplina", fetch=FetchType.LAZY)
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JoinColumn(name="id_area",referencedColumnName="id_area")
 	private Set<Area> areas;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getNome() {
 		return nome;

@@ -1,8 +1,8 @@
 package br.esfinge.entidades;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -10,9 +10,13 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -22,10 +26,16 @@ import br.esfinge.enums.StatusResumo;
 
 @Entity
 @Table(name="tb_resumo")
-public class Resumo extends EntidadeGenerica implements Serializable{
+public class Resumo implements Serializable{
 
 	private static final long serialVersionUID = -3624600370647459509L;
 
+	@Id
+	@Column(name="id_resumo")
+	@SequenceGenerator(name="seq_resumo",sequenceName="seq_resumo",initialValue=1)
+	@GeneratedValue(generator="seq_resumo",strategy=GenerationType.SEQUENCE)
+	private Long id;
+	
 	@Column(name="res_titulo")
 	private String titulo;
 	
@@ -47,12 +57,20 @@ public class Resumo extends EntidadeGenerica implements Serializable{
 	private StatusResumo status;
 	
 	@ManyToOne
-	@JoinColumn(name="res_usu_id", referencedColumnName="tb_id")
+	@JoinColumn(name="id_usuario",referencedColumnName="id_usuario")
 	private Usuario usuario;
 	
 	@NotNull
-	@ManyToMany(mappedBy="tb_resumo", fetch=FetchType.LAZY)
+	@ManyToMany(fetch=FetchType.LAZY)
 	private Set<Assunto> assuntos;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getTitulo() {
 		return titulo;

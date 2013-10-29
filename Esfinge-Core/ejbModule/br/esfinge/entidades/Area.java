@@ -6,25 +6,43 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="tb_area")
-public class Area extends EntidadeGenerica implements Serializable{
+public class Area implements Serializable{
 
 	private static final long serialVersionUID = 6335124941393446975L;
 
-	@Column(name="are_nome", nullable=false)
+	@Id
+	@Column(name="id_area")
+	@SequenceGenerator(name="seq_area",sequenceName="seq_area",initialValue=1)
+	@GeneratedValue(generator="seq_area",strategy=GenerationType.SEQUENCE)
+	private Long id;
+	
+	@Column(name="area_nome", nullable=false)
 	private String nome;
 	
-	@Column(name="are_descricao", nullable=false)
+	@Column(name="area_descricao", nullable=false)
 	private String descricao;
 	
 	@NotNull
-	@ManyToMany(mappedBy="tb_area", fetch=FetchType.LAZY)
+	@ManyToMany(fetch=FetchType.LAZY)
 	private Set<Disciplina> disciplinas;
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getNome() {
 		return nome;

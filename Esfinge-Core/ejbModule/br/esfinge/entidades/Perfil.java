@@ -1,25 +1,35 @@
 package br.esfinge.entidades;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.Arrays;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import br.esfinge.enums.EstadoCivil;
 
 @Entity
 @Table(name="tb_perfil")
-public class Perfil extends EntidadeGenerica implements Serializable{
+public class Perfil implements Serializable{
 
 	private static final long serialVersionUID = -1966212312156562110L;
 
+	@Id
+	@Column(name="id_perfil")
+	@SequenceGenerator(name="seq_perfil",sequenceName="seq_perfil",initialValue=1)
+	@GeneratedValue(generator="seq_perfil",strategy=GenerationType.SEQUENCE)
+	private Long id;
+	
 	@Column(name="per_nome", nullable=false)
 	private String nome;
 	
@@ -46,8 +56,16 @@ public class Perfil extends EntidadeGenerica implements Serializable{
 	private EstadoCivil estadoCivil;
 	
 	@OneToOne
-	@JoinColumn(name="per_usu_id", referencedColumnName="tb_id")
+	@JoinColumn(name="id_usuario",referencedColumnName="id_usuario")
 	private Usuario usuario;
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getNome() {
 		return nome;

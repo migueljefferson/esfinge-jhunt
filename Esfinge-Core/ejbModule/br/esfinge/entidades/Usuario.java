@@ -8,19 +8,28 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="tb_usuario")
-public class Usuario extends EntidadeGenerica implements Serializable{
+public class Usuario implements Serializable{
 
 	private static final long serialVersionUID = 1560701455472816037L;
 
+	@Id
+	@Column(name="id_usuario")
+	@SequenceGenerator(name="seq_usuario",sequenceName="seq_usuario",initialValue=1)
+	@GeneratedValue(generator="seq_usuario",strategy=GenerationType.SEQUENCE)
+	private Long id;
+	
 	@Column(name="usu_email", nullable=false)
 	private String email;
 
@@ -31,15 +40,22 @@ public class Usuario extends EntidadeGenerica implements Serializable{
 	@Temporal(TemporalType.DATE) 
 	private Date dataCadastro;
 	
-	@OneToMany(mappedBy="tb_usuario", cascade=CascadeType.ALL, fetch=FetchType.LAZY, orphanRemoval=true)
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, orphanRemoval=true)
 	private Set<Convite> amizades;
 	
-	@OneToMany(mappedBy="tb_usuario", cascade=CascadeType.ALL, fetch=FetchType.LAZY, orphanRemoval=true)
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, orphanRemoval=true)
 	private Set<Resumo> resumos;
 	
 	@OneToOne(cascade=CascadeType.ALL, optional=false, fetch=FetchType.EAGER, orphanRemoval=true)
-	@PrimaryKeyJoinColumn
 	private Perfil perfil;
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getEmail() {
 		return email;
