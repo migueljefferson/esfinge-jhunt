@@ -2,9 +2,12 @@ package br.esfinge.interfaceDAO;
 
 import java.util.List;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+
+@Stateless
 public class InterfaceDAOImpl<T, PK> implements InterfaceDAO<T, PK> {
 
 	@PersistenceContext(unitName="EsfingePU")
