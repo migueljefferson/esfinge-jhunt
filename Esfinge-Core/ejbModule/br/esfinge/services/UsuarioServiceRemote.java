@@ -1,11 +1,11 @@
 package br.esfinge.services;
 
-import javax.ejb.Remote;
+import javax.ejb.Local;
 
 import br.esfinge.entidades.Usuario;
 
 
-@Remote
+@Local
 public interface UsuarioServiceRemote {
 
 	Usuario inserir(Usuario usuario);

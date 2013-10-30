@@ -8,7 +8,7 @@ import br.esfinge.interfaceDAO.InterfaceDAOImpl;
 public class UsuarioDAO extends InterfaceDAOImpl<Usuario, String>{
 	
 	public UsuarioDAO() {
-		super.setEntidade(new Usuario());
+		super.setEntidade(Usuario.class);
 		super.setNomeEntidade("Usuario");
 	}
 	
@@ -35,5 +35,10 @@ public class UsuarioDAO extends InterfaceDAOImpl<Usuario, String>{
 	@Override
 	public List<Usuario> listar() {
 		return super.listar();
+	}
+	
+	public Usuario logarPorUsuario(String email){
+		return (Usuario) super.manager.
+				createQuery("SELECT u FROM Usuario u WHERE u.email = "+email).getResultList().get(0);
 	}
 }

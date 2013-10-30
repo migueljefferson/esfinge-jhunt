@@ -7,12 +7,12 @@ import javax.persistence.PersistenceContext;
 
 public class InterfaceDAOImpl<T, PK> implements InterfaceDAO<T, PK> {
 
-	@PersistenceContext
-	private EntityManager manager;
-	private T entidade;
+	@PersistenceContext(unitName="EsfingePU")
+	protected EntityManager manager;
+	private Class<T> entidade;
 	private String nomeEntidade;
 	
-	public void setEntidade(T entidade){
+	public void setEntidade(Class<T> entidade){
 		this.entidade = entidade;
 	}
 	
@@ -44,10 +44,9 @@ public class InterfaceDAOImpl<T, PK> implements InterfaceDAO<T, PK> {
 		this.manager.close();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public T carregar(PK primaryKey) {
-		return (T) this.manager.find(entidade.getClass(), primaryKey);
+		return (T) this.manager.find(entidade, primaryKey);
 	}
 
 	@SuppressWarnings("unchecked")

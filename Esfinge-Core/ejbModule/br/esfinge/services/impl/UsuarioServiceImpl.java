@@ -7,7 +7,7 @@ import javax.persistence.PersistenceContext;
 import br.esfinge.entidades.Usuario;
 import br.esfinge.services.UsuarioServiceRemote;
 
-@Stateless
+@Stateless(mappedName="usuarioService")
 public class UsuarioServiceImpl implements UsuarioServiceRemote{
 
 	@PersistenceContext(unitName="EsfingePU")
