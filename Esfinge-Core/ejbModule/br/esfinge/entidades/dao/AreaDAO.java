@@ -2,9 +2,12 @@ package br.esfinge.entidades.dao;
 
 import java.util.List;
 
+import javax.ejb.Stateless;
+
 import br.esfinge.entidades.Area;
 import br.esfinge.interfaceDAO.InterfaceDAOImpl;
 
+@Stateless(mappedName="ejb/AreaDAO")
 public class AreaDAO extends InterfaceDAOImpl<Area, Long> {
 
 	public AreaDAO() {

@@ -2,9 +2,13 @@ package br.esfinge.entidades.dao;
 
 import java.util.List;
 
+import javax.ejb.Stateless;
+import javax.persistence.Query;
+
 import br.esfinge.entidades.Usuario;
 import br.esfinge.interfaceDAO.InterfaceDAOImpl;
 
+@Stateless(mappedName="ejb/UsuarioDAO")
 public class UsuarioDAO extends InterfaceDAOImpl<Usuario, String>{
 	
 	public UsuarioDAO() {
@@ -37,8 +41,10 @@ public class UsuarioDAO extends InterfaceDAOImpl<Usuario, String>{
 		return super.listar();
 	}
 	
-	public Usuario logarPorUsuario(String email){
-		return (Usuario) super.manager.
-				createQuery("SELECT u FROM Usuario u WHERE u.email = "+email).getResultList().get(0);
+	public Usuario logarPorUsuario(String email) throws Exception{
+		Query query = super.manager.createQuery("SELECT u FROM Usuario u WHERE u.email = :email");
+		query.setParameter("email", email);
+		
+		return (Usuario) query.getSingleResult();
 	}
 }

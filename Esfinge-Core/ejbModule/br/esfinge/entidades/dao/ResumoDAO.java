@@ -2,10 +2,14 @@ package br.esfinge.entidades.dao;
 
 import java.util.List;
 
+import javax.ejb.Stateless;
+import javax.persistence.Query;
+
 import br.esfinge.entidades.Resumo;
 import br.esfinge.entidades.Usuario;
 import br.esfinge.interfaceDAO.InterfaceDAOImpl;
 
+@Stateless(mappedName="ejb/ResumoDAO")
 public class ResumoDAO extends InterfaceDAOImpl<Resumo, Long>{
 
 	public ResumoDAO() {
@@ -40,8 +44,10 @@ public class ResumoDAO extends InterfaceDAOImpl<Resumo, Long>{
 	
 	@SuppressWarnings("unchecked")
 	public List<Resumo> listarPorUsuario(Usuario usuario){
-		return super.manager.createQuery("SELECT r FROM Resumo r Usuario u WHERE u.id = "
-					+usuario.getId()).getResultList();
+		Query query = super.manager.createQuery("SELECT r FROM Resumo r Usuario u WHERE u.id = :ident");
+		query.setParameter("ident", usuario.getId());
+		
+		return (List<Resumo>) query.getResultList();
 	}
 	
 }

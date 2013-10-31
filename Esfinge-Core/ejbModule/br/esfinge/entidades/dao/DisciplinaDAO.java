@@ -2,9 +2,13 @@ package br.esfinge.entidades.dao;
 
 import java.util.List;
 
+import javax.ejb.Stateless;
+
 import br.esfinge.entidades.Disciplina;
 import br.esfinge.interfaceDAO.InterfaceDAOImpl;
 
+
+@Stateless(mappedName="ejb/DisciplinaDAO")
 public class DisciplinaDAO extends InterfaceDAOImpl<Disciplina, Long>{
 
 	public DisciplinaDAO() {

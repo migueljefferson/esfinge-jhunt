@@ -2,9 +2,12 @@ package br.esfinge.entidades.dao;
 
 import java.util.List;
 
+import javax.ejb.Stateless;
+
 import br.esfinge.entidades.Perfil;
 import br.esfinge.interfaceDAO.InterfaceDAOImpl;
 
+@Stateless(mappedName="ejb/PerfilDAO")
 public class PerfilDAO extends InterfaceDAOImpl<Perfil, Long>{
 
 	public PerfilDAO() {

@@ -2,9 +2,12 @@ package br.esfinge.entidades.dao;
 
 import java.util.List;
 
+import javax.ejb.Stateless;
+
 import br.esfinge.entidades.Convite;
 import br.esfinge.interfaceDAO.InterfaceDAOImpl;
 
+@Stateless(mappedName="ejb/ConviteDAO")
 public class ConviteDAO extends InterfaceDAOImpl<Convite, Long>{
 
 	public ConviteDAO() {
