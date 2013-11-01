@@ -8,6 +8,14 @@
 	Login
 ********************************/
 
+.ui-dialog-title{
+	font-family: serif;
+	font-style: italic;
+	font-size: 22px;
+	position: relative;
+	left: 36%;
+}
+
 #login-button{
 	height: 67px;
 	position: absolute;
