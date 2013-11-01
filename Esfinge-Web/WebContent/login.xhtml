@@ -10,7 +10,7 @@
 		@import url("css/style.css");
 	</style>
 </h:head>
-<h:body styleClass="body-login">
+<h:body styleClass="body">
 	<p:dialog header="Esfinge" closable="false" widgetVar="modalLogin"
 		minWidth="370" width="370" draggable="false" resizable="false"
 		visible="true" minHeight="150" height="150">
@@ -19,9 +19,9 @@
 				<h:panelGroup id="log">
 					<p:messages id="mensagens" showDetail="true" showSummary="false" />
 					<h:panelGrid id="panel-form" columns="2">
-						<p:outputLabel value="Login" for="login" />
+						<p:outputLabel styleClass="labels" value="Login" for="login" />
 						<p:inputText id="login" value="#{loginMB.usuario}" size="15" />
-						<p:outputLabel value="Senha" for="senha" />
+						<p:outputLabel styleClass="labels" value="Senha" for="senha" />
 						<p:inputText type="password" id="senha" value="#{loginMB.senha}"
 							size="15" />
 						<p:commandButton id="login-button" value="Entrar" action="#{loginMB.logar}"/>
@@ -29,14 +29,13 @@
 				</h:panelGroup>
 			</h:form>
 		</center>
-		<h:form>
+		<h:form id="links">
 			<div id="redefinir-senha">
-				<h:commandLink action="#{p}" value="Esqueceu sua senha?" />
+				<h:commandLink styleClass="labels" action="#{p}" value="Esqueceu sua senha?" />
 			</div>
 			<div id="cadastrar">
-				<h:commandLink  action="cadastro" value="Cadastre-se!"/>
+				<h:commandLink styleClass="labels" action="cadastro" value="Cadastre-se!"/>
 			</div>
-			
 		</h:form>
 	</p:dialog>
 </h:body>

@@ -1,27 +1,37 @@
 @CHARSET "UTF-8";
 
 .body{
-	background-color: #777777;
+	background-color: #777;
 }
 
 /*******************************
 	Login
 ********************************/
 
-.labels{
+/*.labels{
 	color: #fff !important;
+	text-shadow: 0px 1px 0px rgba(0,0,0,1);
+}
+*/
+#links .labels{
+	text-decoration: none;
 }
 
+#links .labels:HOVER{
+	text-decoration: underline;
+}
+/*
 .ui-widget-content{
 	background: #000 -webkit-gradient(linear, left top, left bottom, 
-				from(rgba(255,255,255,0.6)), 
-				to(rgba(255,255,255,0)));
+				from(rgba(255,234,0,1)), 
+				to(rgba(255,234,0,0)));
 	border-color: black;
 }
 .ui-widget-header{
-	background: #ffea00 -webkit-gradient(linear, left top, left bottom, 
-				from(rgba(255,255,255,0.6)), 
-				to(rgba(255,255,255,0)));
+	background: /*#ffea00 #000 -webkit-gradient(linear, left top, left bottom, 
+				from(rgba(255,234,0,1)), 
+				to(rgba(255,234,0,0.77)));
+	color: #000 !important;
 }
 
 .ui-dialog-title{
@@ -31,19 +41,21 @@
 	position: relative;
 	left: 36%;
 }
-
+*/
 #login-button{
 	height: 67px;
 	position: absolute;
 	top: 11px;
 	left: 250px;
 	
-	background: #555 -webkit-gradient(linear, left top, left bottom, 
-				from(rgba(255,255,255,0.8)), 
-				to(rgba(255,255,255,0)));
+	/*background: #000 -webkit-gradient(linear, left top, left bottom, 
+				from(rgba(255,234,0,1)), 
+				to(rgba(255,234,0,0)));
+	
+	text-shadow: 0px 1px 0px rgba(0,0,0,0.7);
 	
 	border-color: black;
-	color: #fff !important;
+	color: #fff !important;*/
 }
 
 #redefinir-senha{
