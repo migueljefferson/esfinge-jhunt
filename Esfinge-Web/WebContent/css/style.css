@@ -8,6 +8,22 @@
 	Login
 ********************************/
 
+.labels{
+	color: #fff !important;
+}
+
+.ui-widget-content{
+	background: #000 -webkit-gradient(linear, left top, left bottom, 
+				from(rgba(255,255,255,0.6)), 
+				to(rgba(255,255,255,0)));
+	border-color: black;
+}
+.ui-widget-header{
+	background: #ffea00 -webkit-gradient(linear, left top, left bottom, 
+				from(rgba(255,255,255,0.6)), 
+				to(rgba(255,255,255,0)));
+}
+
 .ui-dialog-title{
 	font-family: serif;
 	font-style: italic;
@@ -21,6 +37,13 @@
 	position: absolute;
 	top: 11px;
 	left: 250px;
+	
+	background: #555 -webkit-gradient(linear, left top, left bottom, 
+				from(rgba(255,255,255,0.8)), 
+				to(rgba(255,255,255,0)));
+	
+	border-color: black;
+	color: #fff !important;
 }
 
 #redefinir-senha{
