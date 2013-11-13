@@ -1,7 +1,5 @@
 package br.esfinge.teste.integracao.daos;
 
-import static org.junit.Assert.*;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,8 +12,18 @@ public class DisciplinaDAOTest {
 	}
 	
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void BuscandoDisciplinaUmTest() {
+		
+	}
+	
+	@Test
+	public void BuscandoDisciplinaDoisTest(){
+		
+	}
+	
+	@Test
+	public void BuscandoListaTest(){
+		
 	}
 	
 	@After
